@@ -1,2 +1,5 @@
 astronomer-cosmos==1.6.0
 apache-airflow-providers-google
+apache-beam[gcp]==2.51.0
+google-cloud-pubsub==2.21.1
+google-cloud-bigquery==3.11.4
