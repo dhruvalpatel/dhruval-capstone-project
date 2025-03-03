@@ -5,26 +5,6 @@ This project is a capstone project for Zach Wilson's Dataexpert.io Data Engineer
 In this project, I wanted to apply as many skills as I learnt in the bootcamp, so I took opensource dataset called Brazilian E-Commerce Public Dataset by Olist. 
 
 
-## Table of Contents
-1. [Capstone Requirements](#capstone-requirements)
-2. [Project Overview](#project-overview)
-    1. [Problem Statement](#problem-statement)
-    2. [KPI and Use cases](#kpi-and-use-cases)
-    3. [Data Sources](#data-sources)
-    4. [Tables in Snowflake](#data-tables)
-    5. [Technologies Used](#technologies-used)
-    6. [Why I used these tech](#why-i-used-this-tech)
-    7. [Architecture](#architecture)
-3. [KPI visualizations](#kpis)
-4. [Pipeline](#pipeline)
-    1. [Tasks in Dag](#tasks-in-dag)
-    2. [DBT tests](#dbt-tests)
-    3. [Astronomer Cloud](#deployed-in-astronomer-cloud)
-5. [Challenges](#challenges-and-findings)
-
-6. [Next Steps](#next-steps)
-
-
 ## Capstone Requirements
 
 * Identify a problem you'd like to solve.
@@ -134,6 +114,13 @@ BigQuery after validating incoming messages and transforming it.
 
 ### Architecture:
 
+Batch:
+    GCS(csvs) -> Bigquery -> dbt transformations using Airflow
+Streaming: 
+    App -> Message in Pub/sub -> Subscription -> Dataflow job -> Bigquery 
+
+Lucid diagram will come soon.
+
 ### Flow:
 Pipeline flow for batch data load is as follows: I uploaded CSVs into GCS buckets and directly using bucket I created
 BQ raw tables. Then using Airflow dag and using dbt I created staging tables and prod tables incrementally. 
@@ -226,6 +213,3 @@ Below commands, I used to publish messages and deploy dataflow pipeline:
   --streaming
 
 ![img_5.png](img_5.png)
-
-
-This template is borrowed from Tyler and Lokesh.
