@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: stg_product_category_name_translation
+    description: staging table product_category_name_translation
+    columns:
+      - name: product_category_name
+        data_tests:
+          - unique
+#          - not_null
+      - name: product_category_name_english
+        data_tests:
+          - unique

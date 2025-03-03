@@ -1,0 +1,31 @@
+version: 2
+
+models:
+  - name: stg_orders
+    description: staging table orders
+#    tests:
+#      - dbt_utils.unique_combination_of_columns:
+#          combination_of_columns:
+#            - customer_id
+#            - order_id
+    columns:
+      - name: order_id
+        data_tests:
+#          - unique
+          - not_null
+      - name: customer_id
+        data_tests:
+#          - unique
+          - not_null
+      - name: order_status
+        data_tests:
+          - accepted_values:
+              values: ["delivered", "shipped","canceled","unavailable","invoiced","processing","created","approved"]
+      - name: order_purchase_timestamp
+        data_tests:
+          - not_null
+      - name: order_approved_at
+      - name: order_delivered_carrier_date
+      - name: order_delivered_customer_date
+      - name: order_estimated_delivery_date
+

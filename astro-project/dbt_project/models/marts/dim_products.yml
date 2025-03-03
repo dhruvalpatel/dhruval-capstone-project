@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: dim_products
+    description: "Product dimension table containing product-related attributes, including translated category names."
+    columns:
+      - name: product_id
+        description: "Unique identifier for each product."
+        tests:
+          - unique
+          - not_null
+
+      - name: product_category_name_english
+        description: "Translated English name of the product category."
+#        tests:
+#          - not_null
+
+      - name: product_weight_g
+        description: "Weight of the product in grams."
+
+      - name: product_length_cm
+        description: "Length of the product in centimeters."
+
+      - name: product_height_cm
+        description: "Height of the product in centimeters."
+
+      - name: product_width_cm
+        description: "Width of the product in centimeters."

@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: stg_order_items
+    description: staging table order items
+    columns:
+      - name: order_id
+        data_tests:
+          - not_null
+      - name: order_item_id
+        data_tests:
+          - not_null
+      - name: product_id
+        data_tests:
+          - not_null
+      - name: seller_id
+        data_tests:
+          - not_null
+      - name: shipping_limit_date
+      - name: price
+        data_tests:
+          - not_null
+      - name: freight_value
+        data_tests:
+          - not_null
+      - name: composite_key
+        data-tests:
+          - unique:
+             group_by: [ "order_id", "order_item_id" ]

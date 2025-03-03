@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: dim_sellers
+    description: "Seller dimension table containing seller-related attributes."
+    columns:
+      - name: seller_id
+        description: "Unique identifier for each seller."
+        tests:
+          - unique
+          - not_null
+      - name: seller_city
+        description: "City of the seller."
+      - name: seller_state
+        description: "State of the seller."
+      - name: seller_zip_code_prefix
+        description: "Zip code prefix of the seller location."

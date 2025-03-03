@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: agg_sales_trend
+    description: "Sales trends table with total revenue and total orders."
+    columns:
+      - name: month
+        description: "month."
+        tests:
+          - not_null
+      - name: year
+        description: "year"
+      - name: total_revenue
+        description: "total revenue."
+      - name: total_orders
+        description: "total orders."

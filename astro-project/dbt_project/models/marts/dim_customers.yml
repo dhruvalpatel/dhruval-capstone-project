@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: "Customer dimension table containing customer-related attributes."
+    columns:
+      - name: customer_id
+        description: "Unique identifier for each customer."
+        tests:
+          - unique
+          - not_null
+      - name: customer_unique_id
+        description: "Unique identifier across multiple orders for the same customer."
+      - name: customer_city
+        description: "City of the customer."
+      - name: customer_state
+        description: "State of the customer."
+      - name: customer_zip_code_prefix
+        description: "Zip code prefix of the customer location."

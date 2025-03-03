@@ -1,0 +1,60 @@
+version: 2
+
+models:
+  - name: audit_fact_sales
+    description: "Audit Fact table containing sales transactions, customer behavior, and order trends."
+    columns:
+      - name: order_id
+        description: "Unique identifier for each order."
+        tests:
+          - not_null
+
+      - name: customer_id
+        description: "Unique customer identifier."
+
+      - name: product_id
+        description: "Unique product identifier."
+
+      - name: seller_id
+        description: "Seller who fulfilled the order."
+
+      - name: order_purchase_timestamp
+        description: "Timestamp when the order was placed."
+        tests:
+          - not_null
+
+      - name: order_delivered_timestamp
+        description: "Timestamp when the order was delivered."
+
+      - name: days_to_deliver
+        description: "Number of days between purchase and delivery."
+
+      - name: order_status
+        description: "Current status of the order (delivered, canceled, etc.)."
+
+      - name: payment_type
+        description: "Payment method used (credit card, boleto, etc.)."
+
+      - name: payment_installments
+        description: "Number of installments chosen for the payment."
+
+      - name: payment_value
+        description: "Total transaction amount."
+
+      - name: freight_value
+        description: "Shipping cost."
+
+      - name: review_score
+        description: "Customer review score (1-5)."
+
+      - name: customer_city
+        description: "City of the customer."
+
+      - name: customer_state
+        description: "State of the customer."
+
+      - name: seller_city
+        description: "City where the seller is located."
+
+      - name: seller_state
+        description: "State where the seller is located."

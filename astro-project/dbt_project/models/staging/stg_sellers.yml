@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: stg_sellers
+    description: staging table sellers
+    columns:
+      - name: seller_id
+        data_tests:
+          - unique
+          - not_null
+      - name: seller_zip_code_prefix
+        data_tests:
+          - not_null
+      - name: seller_city
+        data_tests:
+          - not_null
+      - name: seller_state
+        data_tests:
+          - not_null

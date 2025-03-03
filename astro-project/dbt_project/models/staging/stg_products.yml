@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: stg_products
+    description: staging table products
+    columns:
+      - name: product_id
+        data_tests:
+          - unique
+          - not_null
+      - name: product_category_name
+      - name: product_name_lenght
+      - name: product_description_lenght
+      - name: product_photos_qty
+      - name: product_weight_g
+      - name: product_length_cm
+      - name: product_height_cm
+      - name: product_width_cm
