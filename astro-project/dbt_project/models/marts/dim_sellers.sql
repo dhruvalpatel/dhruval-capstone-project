@@ -8,4 +8,4 @@ SELECT
     seller_city,
     seller_state,
     seller_zip_code_prefix
-FROM {{ source('capstone_dataset', 'sellers') }}
+FROM {{ ref('stg_sellers') }}

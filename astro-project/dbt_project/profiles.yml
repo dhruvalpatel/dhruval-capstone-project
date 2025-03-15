@@ -4,8 +4,8 @@ my_dbt_project:
       dataset: capstone_dataset
       job_execution_timeout_seconds: 300
       job_retries: 1
-      keyfile: /usr/local/airflow/dbt_project/capstone-project-451604-70c92207f679.json
-#      keyfile: /Users/dpatel/Downloads/Zach/2025_Bootcamp/capstone_dbt_astro/astro-project/dbt_project/capstone-project-451604-70c92207f679.json
+#      keyfile: /usr/local/airflow/dbt_project/capstone-project-451604-70c92207f679.json
+      keyfile: /Users/dpatel/Downloads/Zach/2025_Bootcamp/capstone_dbt_astro/astro-project/dbt_project/capstone-project-451604-70c92207f679.json
       location: US
       method: service-account
       priority: interactive

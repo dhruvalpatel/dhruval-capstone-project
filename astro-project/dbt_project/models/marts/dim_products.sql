@@ -11,7 +11,7 @@ WITH products AS (
         product_length_cm,
         product_height_cm,
         product_width_cm
-    FROM {{ source('capstone_dataset', 'products') }}
+    FROM {{ ref('stg_products') }}
 ),
 
 category_translation AS (

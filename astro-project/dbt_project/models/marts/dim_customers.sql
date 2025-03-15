@@ -10,4 +10,4 @@ SELECT
     customer_city,
     customer_state,
     customer_zip_code_prefix
-FROM {{ source('capstone_dataset', 'customers') }}
+FROM {{ ref('stg_customers') }}

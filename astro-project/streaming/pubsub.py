@@ -11,7 +11,7 @@ topic_path = publisher.topic_path(
 
 timestamp = datetime.now(timezone.utc).isoformat(timespec='milliseconds').replace("+00:00", "Z")
 
-for i in range(random.randint(1, 1)):
+for i in range(random.randint(1, 5)):
     """Generate random orders between 1 to 5."""
     # Publish the message
     message_json = json.dumps(GenerateOrder.generate_order())
