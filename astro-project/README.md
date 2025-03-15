@@ -61,7 +61,7 @@ This project is a real-time data pipeline that works with multiple services like
 **Description:** Measures the percentage of returning customers who make repeat purchases over months.  
 **Use Case:** Helps assess customer loyalty, improve retention strategies, and evaluate the impact of customer experience initiatives.  
 
-## **Real-Time Features**  
+### **Real-Time Features:**  
 
 ### **9. Real-Time Order Processing**  
 **Description:**  
@@ -145,7 +145,6 @@ The conceptual data model represents key entities and their relationships in the
 - **Order**: A purchase transaction made by a customer.
 - **Product**: Items available for sale.
 - **Seller**: The merchant selling products.
-- **Payment**: Details of transaction payment.
 
 ### Relationships:
 - A **customer** places multiple **orders**.
@@ -155,7 +154,7 @@ The conceptual data model represents key entities and their relationships in the
 
 
 ### Diagram:
-![img.png](Conceptual Diagram(Capstone).png)
+![img.png](conceptual_diagram.png)
 
 ### dbt Lineage Graph:
 
@@ -271,7 +270,7 @@ other than null checks but in future I will write unit test cases.
     * ```setup.py```: this file is required to deploy a Dataflow job(streaming_job.py) to the Google Cloud Platform
     * ```generate_order.py```: Running ```pubsub.py``` will use this code to generate the fake order and push to the GCP project
 
-# How to Navigate the Code?
+## How to Navigate the Code?
 - For Airflow DAGs → Check astro-project/dags/ 
 - dbt Models → Check astro-project/dbt/models/ 
 - BigQuery SQL transformations → Look into dbt/models/marts/
