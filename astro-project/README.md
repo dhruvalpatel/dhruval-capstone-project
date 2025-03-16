@@ -279,25 +279,29 @@ other than null checks but in future I will write unit test cases.
 Screenshots: 
 
 ## Tableau Dashboard:
-1. **Seller Avg Days to Deliver and Order Count by city**
+1. **Seller Avg Days to Deliver and Order Count of Seller by city**
 
-![img_14.png](img_14.png)
+![img_15.png](Seller by City.png)
 
 2. **Order count of customer and avg Order value**
 
-![img_15.png](img_15.png)
+![img_15.png](Order value by City.png)
 
 3. **Growth Rate, Total Revenue, Retained Customers/Month**
 
-![img_17.png](img_17.png)
+![Monthly Growth.png](Monthly Growth.png)
 
 4. **Top Selling Products**
 
-![img_18.png](img_18.png)
+![Top Selling Product.png](Top Selling Product.png)
 
-5. **Dashbaord**
+5. **Avg Customer Spend**
 
-![img_19.png](img_19.png)
+![Avg Customer Spent.png](Avg Customer Spent.png)
+
+6. **Dashbaord**
+
+![Dashboard.png](Dashboard.png)
 
 ## BigQuery:
 
