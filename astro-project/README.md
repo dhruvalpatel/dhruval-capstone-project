@@ -281,23 +281,23 @@ Screenshots:
 ## Tableau Dashboard:
 1. **Seller Avg Days to Deliver and Order Count of Seller by city**
 
-![img_15.png](Seller by City.png)
+![seller_by_city.png](seller_by_city.png)
 
 2. **Order count of customer and avg Order value**
 
-![img_15.png](Order value by City.png)
+![order_value_by_city.png](order_value_by_city.png)
 
 3. **Growth Rate, Total Revenue, Retained Customers/Month**
 
-![Monthly Growth.png](Monthly Growth.png)
+![monthly_growth.png](monthly_growth.png)
 
 4. **Top Selling Products**
 
-![Top Selling Product.png](Top Selling Product.png)
+![top_selling_product.png](top_selling_product.png)
 
 5. **Avg Customer Spend**
 
-![Avg Customer Spent.png](Avg Customer Spent.png)
+![avg_customer_spent.png](avg_customer_spent.png)
 
 6. **Dashbaord**
 
