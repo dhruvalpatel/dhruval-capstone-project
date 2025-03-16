@@ -279,8 +279,25 @@ other than null checks but in future I will write unit test cases.
 Screenshots: 
 
 Tableau Dashboard:
-![img.png](img.png)
+1. Seller Avg Days to Deliver and Order Count by city
 
+![img_14.png](img_14.png)
+
+2. Order count of customer and avg Order value
+
+![img_15.png](img_15.png)
+
+3. Growth Rate, Total Revenue, Retained Customers/Month
+
+![img_17.png](img_17.png)
+
+4. Top Selling Products
+
+![img_18.png](img_18.png)
+
+5. Dashbaord
+
+![img_19.png](img_19.png)
 
 BigQuery:
 
