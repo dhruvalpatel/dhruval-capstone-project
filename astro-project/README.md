@@ -34,7 +34,7 @@ This project is a real-time data pipeline that works with multiple services like
 **Use Case:** Helps track customer acquisition trends and evaluate the impact of marketing campaigns, seasonal changes, or business strategies on customer growth.  
 
 ### **2. Top-Selling Products**  
-**Description:** Identifies the top-selling products over time with options for different time granularities (daily, monthly, yearly).  
+**Description:** Identifies the top-selling products over time with options for different time granularity (daily, monthly, yearly).  
 **Use Case:** Assists in inventory management, product demand forecasting, and marketing strategies for high-performing products.  
 
 ### **3. Sales by Sellers**  
@@ -104,10 +104,10 @@ at 11 PM
 
 ## **Technologies Used**  
 
-This project leverages **Google Cloud Platform (GCP)** extensively due to my strong experience with it.  
+This project leverages **Google Cloud Platform (GCP)** extensively due to my experience with it and wanted to learn more of it.  
 
 ### **1. Pub/Sub (Kafka Equivalent in GCP)**  
-- Acts as both a **message producer** for real-time API data and a **temporary storage layer** until data is consumed.  
+- Acts as both a **message receiver** from real-time API data and a **temporary storage layer** until data is consumed.  
 - Ensures reliable and scalable event-driven messaging before data ingestion into **BigQuery**.  
 
 ### **2. BigQuery**  
@@ -120,15 +120,11 @@ This project leverages **Google Cloud Platform (GCP)** extensively due to my str
 - **Why Astronomer instead of Composer?**  
   - Astronomer simplifies **development and deployment**, making it easier to manage Airflow pipelines.  
 
-### **4. Astronomer (Managed Airflow)**  
-- A **managed platform** built on top of Apache Airflow.  
-- Provides **seamless scaling, simplified deployment, and enhanced monitoring**, reducing operational complexity.  
-
-### **5. dbt (Data Build Tool)**  
+### **4. dbt (Data Build Tool)**  
 - Used for **transforming raw data** within BigQuery and building **staging, fact, and dimension tables**.  
 - Implements **modular, version-controlled transformations** while ensuring **data quality checks**.  
 
-### **6. Dataflow (Managed Apache Beam on GCP)**  
+### **5. Dataflow (Managed Apache Beam on GCP)**  
 - **Consumes messages** from **Pub/Sub**, applies **validations and transformations**, and **writes processed data** into **BigQuery**.  
 - Ensures **fault tolerance, scalability, and real-time data processing**.  
 
@@ -197,26 +193,24 @@ Astronomer Instant Daily:
 ### 1. Data Ingestion with Pub/Sub  
 - Created a **Pub/Sub topic (`olist_orders_topic`)** to receive JSON messages containing **order, order items, and payment information**, simulating a real e-commerce application.
 ![img_7.png](img_7.png)
-- Script to ingest data to Pub/Sub topic would be placed into a Virtual Machine to mimic the real-time scenario to generate the orders.
-- This command will run the 
-  ```Python3 streaming/pubsub.py```
-- This command will use ```streaming/generate_order``` file to get the order and this line will publish the JSON message to the topic ```future = publisher.publish(
+- Script(```python3 streaming/pubsub.py```) to ingest data to Pub/Sub topic would be placed into a Virtual Machine to mimic the real-time scenario to generate the orders. 
+- This script uses ```streaming/generate_order.py``` file to get the order and this line will publish the JSON message to the topic ```future = publisher.publish(
         topic_path,
         message_json.encode('utf-8')
     )``` 
-- A **Pub/Sub subscription (`olist_orders_subscription`)** listens for incoming messages.
+- A **Pub/Sub subscription (`olist_orders_subscription`)** listens for incoming messages from topic.
 ![img_8.png](img_8.png)
 
 
 ### 2. Data Processing with Dataflow  
-- A **Dataflow job** continuously pulls messages from the subscription.  
+- A **Dataflow job** continuously pulls messages from the subscription `olist_orders_subscription`.  
 - On message arrival, the pipeline **transforms and validates** the data.
 - Dataflow job code will be found at ```streaming/streaming_job.py```
 - Logic of parsing the JSON message and updating the corresponding tables(order, order_items and order_payments) is handled in the job only.
 - The processed data is then written to **corresponding BigQuery tables**.
 ![img_9.png](img_9.png)
 ![img_10.png](img_10.png)
-- Upload the streaming job into Google Cloud would require additional settings. ```streaming/setup.py``` this file is used when submitting the job to GCP(Google Cloud Platform).
+- Deploy the streaming job into Google Cloud would require additional settings. ```streaming/setup.py```  file is used when submitting the job to GCP(Google Cloud Platform).
 - Below command is used to submit the job into cloud
     ```sh
     python3 streaming_job.py \
@@ -230,7 +224,7 @@ Astronomer Instant Daily:
         --max_num_workers=2 \
         --dataflow_service_options=streaming_mode_at_least_once \
         --streaming
-- Local machine can also be used to act as a Dataflow runner using below command
+- Local machine can also be used to act as a Dataflow runner using below command(for development purposes)
     ```sh 
     python3 streaming_job.py \
       --project=capstone-project-451604 \
@@ -248,27 +242,25 @@ Astronomer Instant Daily:
 ## Tasks in Dag
 1. daily_dag - This dag is a full dbt build dag which builds all tables once in a day.
 
-Other dags will be added in future to further enhance data warehouse. i.e. combine and update offline data of customers,
+Other dags will be added in future to further enhance data warehouse. i.e. combine and update off-line data of customers, products and sellers
 
 ## DBT tests
-* I have incorporated several DBT tests that will help in maintaining data quality
-* Since it is an e-comm use case where we have to work with data uncertainty, I don't have much test cases 
-other than null checks but in future I will write unit test cases.
+* I have incorporated several basic DBT tests that will help in maintaining data quality which can be found in dbt_project/models
 
 # Project Contents
 
 - dags: This folder contains the Python files for your Airflow DAGs.
   - `daily_dag.py`: This DAG uses BashOperator and DbtTaskGroup to perform its operations.
 - dbt_project: This folder contains the dbt project.
-- Dockerfile: This file contains instructions to install libs which are required to execute our pipeline, dbt-core, dbt-bigquery etc.
-- include: This folder contains ```constants.py``` that includes configuration for the capstone project.
-- requirements.txt: Install Python packages needed for your project by adding them to this file.
+- Dockerfile: This file contains instructions to install libs(dbt-core, dbt-bigquery etc) which are required to execute the pipeline.
+- include: This folder contains ```constants.py``` which includes configuration for the capstone project.
+- requirements.txt: Installs Python packages needed for the pipeline.
 - streaming: This folder contains code for real-time pipeline.
     * ```pubsub.py```: pushes message to GCP Pub/Sub topic
-      * This script can be placed in a VM and cronjob can be set to mimic the real-time use-case of streaming.
-    * ```streaming_job.py```: contains code for Dataflow code which parsed message from Pub/Sub subscription and processes it.
-    * ```setup.py```: this file is required to deploy a Dataflow job(streaming_job.py) to the Google Cloud Platform
-    * ```generate_order.py```: Running ```pubsub.py``` will use this code to generate the fake order and push to the GCP project
+      * This script can be placed in a VM and cronjob can be set to mimic the real-time order updates use-case of streaming.
+    * ```streaming_job.py```: contains code for Dataflow(Apache Beam) code which parses message from Pub/Sub subscription and processes it.
+    * ```setup.py```: this file is required to deploy a Dataflow(Apache Beam) job(```streaming_job.py```) to the Google Cloud Platform
+    * ```generate_order.py```: Running ```pubsub.py``` uses ```generate.py``` to generate the fake order and push to the Pub/Sub topic.
 
 ## How to Navigate the Code?
 - For Airflow DAGs → Check astro-project/dags/ 
@@ -291,11 +283,11 @@ Screenshots:
 
 ![monthly_growth.png](monthly_growth.png)
 
-4. **Top Selling Products**
+4. **Top Selling Products(through-out history)**
 
 ![top_selling_product.png](top_selling_product.png)
 
-5. **Avg Customer Spend**
+5. **Avg Customer Spend by State**
 
 ![avg_customer_spent.png](avg_customer_spent.png)
 
